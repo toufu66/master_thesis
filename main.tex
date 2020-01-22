@@ -1,0 +1,52 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%         2019年度　卒業論文
+%             layout.sty  を使用
+%
+%          宇佐川研究室　　古閑　将大
+%windows で記述　文字コードはShiftJIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4j, 12pt]{jreport}
+\usepackage{layout,ascmac,fancybox}	% スタイルファイルの読み込み
+\usepackage{amsmath}
+\usepackage{rotating}		%図表のキャプション回転のためのスタイルファイル
+\usepackage{arydshln}		% 表中の破線描画
+\usepackage{subfigure}
+\usepackage{siunitx}
+\usepackage{setspace}
+
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+
+%%%% 新しい罫線の定義(array.sty使用) %%%%%%%%%%%%%%%%%%%%%
+\def\bhline{\noalign{\hrule height 1pt}}	% 太い横線(\bhline)の定義
+\def\bvline{\vrule width 1pt}				% 太い縦線(\bvline)の定義
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\Title{  }  % 日本語タイトル
+\eTitle{  No titled...}  % 英語タイトル
+\Author{古閑　将大}	% 著者名
+\eAuthor{Masahiro Koga}	% 著者名
+\Date{2020}{2}{14}	% 発表日{年}{月}{日}
+
+
+\Maketitle 			% 表紙
+\Synopsis 			% 表紙=概要=
+\include{jsynopsis}	% 日本語概要 jsynopsis.texを読み込み，この位置に挿入
+\eSynopsis
+\include{esynopsis}  % 英語概要
+\pagestyle{headnombre}		% ページ番号を右上に表示
+\pagenumbering{roman}		% ローマ数字によるページ番号付記
+\tableofcontents 			% 目次の作成
+\listoffigures		% 表目次
+\listoftables         % 図目次
+    \include{chap1} % はじめに
+    \include{chap2} % 先行研究と測定手法
+    \include{chap3} % 実験
+    \include{chap4} % 結論
+    \include{chap5} % 
+    \include{thanks}	% 謝辞
+    \include{reference}	% 参考文献
+    \include{conference}	% 参考文献
+   	%\include{appendix}%付録
+\end{document}
