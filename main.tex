@@ -12,8 +12,10 @@
 \usepackage{rotating}		%図表のキャプション回転のためのスタイルファイル
 \usepackage{arydshln}		% 表中の破線描画
 \usepackage{subfigure}
-\usepackage{siunitx}
+%\usepackage{siunitx}
 \usepackage{setspace}
+\usepackage{bm}
+\usepackage[dvipdfmx]{}
 
 \newcommand{\argmax}{\mathop{\rm arg~max}\limits}
 
@@ -23,17 +25,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\Title{  }  % 日本語タイトル
+\Title{ 未定 }  % 日本語タイトル
 \eTitle{  No titled...}  % 英語タイトル
 \Author{古閑　将大}	% 著者名
 \eAuthor{Masahiro Koga}	% 著者名
-\Date{2020}{2}{14}	% 発表日{年}{月}{日}
+\Date{2}{2}{14}	% 発表日{年}{月}{日}
+\eDate{2020}{February}{14}	% 発表日{年}{月}{日}
 
 
 \Maketitle 			% 表紙
 \Synopsis 			% 表紙=概要=
-\include{jsynopsis}	% 日本語概要 jsynopsis.texを読み込み，この位置に挿入
-\eSynopsis
+\include{jsynopsis}% 日本語概要 jsynopsis.texを読み込み，この位置に挿入
+\EnSynopsis
 \include{esynopsis}  % 英語概要
 \pagestyle{headnombre}		% ページ番号を右上に表示
 \pagenumbering{roman}		% ローマ数字によるページ番号付記

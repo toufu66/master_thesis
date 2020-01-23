@@ -1,0 +1,162 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%							
+%% 	卒業論文用スタイルファイル		　      
+%%   voice_lab.sty Ver.01 
+%%			Feb 3 2005　　　
+%%			by Shintaro Ogo.	
+%%							
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%修論に用いるときは，
+%66,97行目をそれぞれ「卒業論文」に書き換え 
+%78,80,111,113行目の所属名を変更
+
+%\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{hhline}
+
+\setlength{\textwidth}{150truemm}
+\setlength{\oddsidemargin}{30truemm}
+\addtolength{\oddsidemargin}{-1truein}
+
+\setlength\topmargin{4,6mm}
+\setlength{\headheight}{4.2truemm}
+\setlength{\headsep}{10truemm}
+\setlength{\textheight}{219.8truemm}
+
+%\setlength\voffset{0.96cm}
+%\setlength\voffset{0.96cm}
+%\setlength\textwidth{36zw}
+%\setlength\textheight{34\baselineskip}
+%\setlength\textheight{36\baselineskip}
+%\setlength{\headsep}{25pt}
+%\setlength\footskip{21pt}
+
+\renewcommand{\bibname}{参考文献}
+\makeatletter
+\def\@cite#1#2{$^{\mbox{\tiny[{#1\if@tempswa , #2\fi}]}}$}
+\makeatother
+
+\makeatletter
+\spaceskip=.45em plus .1667em minus .1111em	% 単語間に挿入されるグルー
+\xspaceskip=.6em plus .5em minus .037em    	% センテンス間に挿入されるグルー
+\kanjiskip=.1zw plus .035zw minus .04zw    	% 全角と全角の間に挿入されるグルー
+\xkanjiskip=.13zw plus .01zw minus .01zw   	% 全角と半角の間に挿入されるグルー
+
+
+\renewcommand{\baselinestretch}{1.15}		% 行間を1.15倍にする
+
+%
+% Title (Maketitle Synposis synopsis)
+%
+\def\Title#1{\gdef\Titlebox{#1}}
+\def\@Title{\@ifundefined{Titlebox}{{What title is this ?}}{\Titlebox}}
+
+\def\eTitle#1{\gdef\eTitlebox{#1}}
+\def\@eTitle{\@ifundefined{eTitlebox}{{What title is this ?}}{\eTitlebox}}
+
+\def\Author#1{\gdef\Authorbox{#1}}
+\def\@Author{%
+ \@ifundefined{Authorbox}{{Who are you ?}}{\Authorbox}}
+
+\def\eAuthor#1{\gdef\eAuthorbox{#1}}
+\def\@eAuthor{%
+ \@ifundefined{eAuthorbox}{{Who are you ?}}{\eAuthorbox}}
+
+\def\Date#1#2#3{\gdef\Datebox{平成#1年#2月#3日}}
+\def\@Date{\@ifundefined{Datebox}{{What day is today ?}}{\Datebox}}
+
+\def\eDate#1#2#3{\gdef\eDatebox{#2 #3, #1}}
+\def\@eDate{\@ifundefined{eDatebox}{{What day is today ?}}{\eDatebox}}
+
+\newcommand{\Maketitle}{%
+  \pagestyle{empty}
+  \vspace{-39pt}
+  \begin{center}
+  	\Huge { 修士論文} \par
+  \vspace*{2cm}
+  {\hsize=\textwidth
+      \vfill
+      {\Huge \@Title \par}
+      \vfill
+  }
+
+  \vspace{0cm}
+   {\LARGE \@Author \par}
+   {\LARGE \@Date \par }
+  \vspace{10cm}
+   {\LARGE 熊本大学 大学院 自然科学研究科 \par}
+  \vspace{-5pt}
+   {\LARGE 情報電気電子工学専攻 \par}
+  \newpage
+  \pagestyle{headings}
+  \renewcommand{\baselinestretch}{1.15}
+ \end{center}
+}
+
+\def\kintou#1#2{%
+  \makebox[#1]{\kanjiskip=0pt plus 1fill minus 1fill
+  \xkanjiskip=\kanjiskip#2}}
+
+
+\def\senior{\gdef\@senior{}}
+
+\newcommand{\Synopsis}{%
+  \pagestyle{empty}
+  \begin{center}
+  	\Huge { 修士論文} \par
+  \vspace*{2cm}
+  {\hsize=\textwidth
+      \vfill
+      {\Huge \@Title \par}
+      \vfill
+  }
+%  \vspace{9pt}
+  {\Large -- 論文概要 --}\\
+
+  \vspace{4cm}
+   {\LARGE \@Author \par}
+ \vspace*{3cm}
+   {\Large \@Date \par }
+  \vspace{0pt}
+   {\Large 熊本大学 大学院 自然科学研究科 \par}
+  \vspace{-5pt}
+   {\Large 情報電気電子工学専攻 \par}
+  \newpage
+  \pagestyle{headings}
+  \renewcommand{\baselinestretch}{1.15}
+ \end{center}
+}
+
+\newcommand{\eSynopsis}{%
+  \pagestyle{empty}
+  \begin{center}
+  	\Huge { MASTER'S THESIS } \par
+  \vspace*{2cm}
+  {\hsize=\textwidth
+      
+      {\Huge \@eTitle \par}
+      
+  }
+  \vspace{15pt}
+  {\Large -- Synopsis --}\\
+
+  \vspace{10cm}
+   {\LARGE \@eAuthor \par}
+  \vspace{0pt}
+   {\Large February 14, 2019} \par%
+  \vspace{0pt}
+  {\Large Graduate School of Science and Technology, \par}
+  \vspace{-5pt}
+   {\Large Kumamoto University \par}
+  \newpage
+  \pagestyle{headings}
+  \renewcommand{\baselinestretch}{1.15}
+ \end{center}
+}
+
+
+
+\makeatother

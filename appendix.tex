@@ -1,0 +1,1334 @@
+﻿\appendix
+\chapter{本論文の測定で用いたソースリスト}
+\section{調整法のプログラム}
+
+\scriptsize{
+
+\begin{verbatim}
+
+clear all;
+
+%include necessay files
+path(path, './octave');
+path(path, './octave/lib');
+path(path, './octave/MakeSound');
+path(path, './octave/Other');
+path(path, './octave/Play');
+path(path, './octave/Save');
+path(path, './octave/m');
+path(path, './octave/func');
+path(path, './octave/Turningpoint');
+
+
+change = 0;
+ITD1 = 0;
+ITD2 = 0;
+ITD3 = 0;
+AVEITD = 0;
+n = 0;
+number = 13;
+
+CENTER = "c";
+
+A = 0;
+B = 0;
+C = 0;
+D = 0;
+E = 0;
+F = 0;
+
+ITDrange = 4;
+
+printf("\nStart testing now!!\nFirst, the test which decides the range of ITD is done.\n");
+input("The first test start. Press Enter key!\n");
+
+ITDrange = testITD();
+
+printf("\nThe first test is finished.\n");
+input("The main test start. Press Enter key!\n");
+
+
+while(n<5)
+
+if( ITDrange == 1 )
+ cnum = 31;
+ if(n==1)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000600s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000580s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000560s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000540s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000520s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000500s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000480s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000460s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000440s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000420s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000400s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000380s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000340s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000320s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000280s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000260s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000220s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000200s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000160s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000140s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000120s.wav');
+ elseif(n==4)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000600s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000580s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000560s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000540s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000520s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000500s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000480s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000460s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000440s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000420s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000400s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000380s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000340s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000320s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000280s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000260s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000220s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000200s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000160s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000140s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000120s.wav');
+ elseif(n==3)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000600s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000580s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000560s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000540s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000520s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000500s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000480s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000460s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000440s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000420s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000400s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000380s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000340s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000320s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000280s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000260s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000220s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000200s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000160s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000140s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000120s.wav');
+ elseif(n==0)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000600s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000580s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000560s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000540s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000520s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000500s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000480s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000460s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000440s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000420s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000400s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000380s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000340s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000320s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000280s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000260s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000220s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000200s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000160s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000140s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000120s.wav');
+ elseif(n==2)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000600s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000580s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000560s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000540s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000520s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000500s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000480s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000460s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000440s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000420s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000400s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000380s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000340s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000320s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000280s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000260s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000220s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000200s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000160s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000140s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000120s.wav');
+ endif
+elseif( ITDrange == 2 )
+ cnum = 25;
+ if(n==4)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000480s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000460s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000440s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000420s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000400s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000380s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000360s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000340s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000320s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000280s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000260s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000220s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000200s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000160s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000140s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000100s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000080s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000040s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000020s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000000s.wav');
+ elseif(n==2)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000480s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000460s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000440s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2B_ITD_-0.000420s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000400s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000380s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000360s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000340s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000320s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000280s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000260s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000220s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000200s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000160s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000140s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000100s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000080s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000040s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000020s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000000s.wav');
+ elseif(n==0)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000480s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000460s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000440s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000420s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000400s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000380s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000360s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000340s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000320s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000280s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000260s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000220s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000200s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000160s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000140s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000100s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000080s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000040s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000020s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000000s.wav');
+ elseif(n==1)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000480s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000460s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000440s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000420s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000400s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000380s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000360s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000340s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000320s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000280s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000260s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000220s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000200s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000160s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000140s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000100s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000080s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000040s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000020s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000000s.wav');
+ elseif(n==3)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000480s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000460s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000440s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000420s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000400s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000380s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000360s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000340s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000320s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000280s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000260s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000220s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000200s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000160s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000140s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000100s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000080s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000040s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000020s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000000s.wav');
+ endif
+elseif( ITDrange == 3 )
+ cnum = 19;
+ if(n==0)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000360s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000340s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000320s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000300s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000280s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000260s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000220s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000200s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000160s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000140s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000100s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000080s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000040s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000020s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000000s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000020s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000040s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000080s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000100s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000120s.wav');
+ elseif(n==3)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000360s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000340s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000320s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000300s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000280s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000260s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000220s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000200s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000160s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000140s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000100s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000080s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000040s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000020s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000000s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000020s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000040s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000080s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000100s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000120s.wav');
+ elseif(n==4)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000360s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000340s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000320s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000300s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000280s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000260s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000220s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000200s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000160s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000140s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000100s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000080s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000040s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000020s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000000s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000020s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000040s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000080s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000100s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000120s.wav');
+ elseif(n==1)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000360s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000340s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000320s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000300s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000280s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000260s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000220s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000200s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000160s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000140s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000100s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000080s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000040s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000020s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000000s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000020s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000040s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000080s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000100s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000120s.wav');
+ elseif(n==2)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000360s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000340s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000320s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000300s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000280s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000260s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000220s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000200s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000160s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000140s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000100s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000080s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000040s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000020s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000000s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000020s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000040s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000060s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000080s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000100s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000120s.wav');
+ endif
+elseif( ITDrange == 4 )
+ cnum = 13;
+ if(n==2)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000240s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000220s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000200s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000160s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000140s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000100s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000080s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000040s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000020s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000000s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000020s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000040s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000080s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000100s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000140s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000160s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000200s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000220s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000240s.wav');
+ elseif(n==3)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000240s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000220s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000200s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000160s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000140s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000100s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000080s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000040s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000020s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000000s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000020s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000040s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000080s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000100s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000140s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000160s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000200s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000220s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000240s.wav');
+ elseif(n==0)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000240s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000220s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000200s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000160s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000140s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000100s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000080s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000040s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000020s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000000s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000020s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000040s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000080s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000100s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000140s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000160s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000200s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000220s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000240s.wav');
+ elseif(n==4)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000240s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000220s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000200s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000160s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000140s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000100s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000080s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000040s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000020s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000000s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000020s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000040s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000080s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000100s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000140s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000160s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000200s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000220s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000240s.wav');
+ elseif(n==1)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000240s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000220s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000200s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000160s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000140s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000100s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000080s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000040s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000020s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000000s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000020s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000040s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000060s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000080s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000100s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000120s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000140s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000160s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000180s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000200s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000220s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000240s.wav');
+ endif
+elseif( ITDrange == 5 )
+ cnum = 7;
+ if(n==3)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000100s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000080s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000040s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000020s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000000s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000020s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000040s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000080s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000100s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000140s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000160s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000200s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000220s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000260s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000280s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000300s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000320s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000340s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000360s.wav');
+ elseif(n==0)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000100s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000080s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000040s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000020s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000000s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000020s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000040s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000080s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000100s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000140s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000160s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000200s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000220s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000260s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000280s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000300s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000320s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000340s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000360s.wav');
+ elseif(n==2)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000100s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000080s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000040s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000020s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000000s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000020s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000040s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000080s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000100s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000140s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000160s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000200s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000220s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000260s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000280s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000300s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000320s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000340s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000360s.wav');
+ elseif(n==1)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000100s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000080s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000040s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000020s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000000s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000020s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000040s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000080s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000100s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000140s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000160s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000200s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000220s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000260s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000280s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000300s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000320s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000340s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000360s.wav');
+ elseif(n==4)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000100s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000080s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000040s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000020s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000000s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000020s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000040s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000060s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000080s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000100s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000120s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000140s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000160s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000180s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000200s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000220s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000240s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000260s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000280s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000300s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000320s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000340s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000360s.wav');
+ endif
+elseif( ITDrange == 6 )
+ cnum = 1; 
+ if(n==2)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_-0.000000s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000020s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000040s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000080s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000100s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000140s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000160s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000200s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000220s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000260s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000280s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000320s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000340s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000360s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000380s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000400s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000420s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000440s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000460s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000480s.wav');
+ elseif(n==4)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_-0.000000s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000020s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000040s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000080s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000100s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000140s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000160s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000200s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000220s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000260s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000280s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000320s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000340s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000360s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000380s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000400s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000420s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000440s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000460s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000480s.wav');
+ elseif(n==0)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_-0.000000s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000020s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000040s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000080s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000100s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000140s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000160s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000200s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000220s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000260s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000280s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000320s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000340s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000360s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000380s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000400s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000420s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000440s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000460s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000480s.wav');
+ elseif(n==1)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_-0.000000s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000020s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000040s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000080s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000100s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000140s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000160s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000200s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000220s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000260s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000280s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000320s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000340s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000360s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000380s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000400s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000420s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000440s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000460s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000480s.wav');
+ elseif(n==3)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_-0.000000s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000020s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000040s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000060s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000080s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000100s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000120s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000140s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000160s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000180s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000200s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000220s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000240s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000260s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000280s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000300s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000320s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000340s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000360s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000380s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000400s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000420s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000440s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000460s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000480s.wav');
+ endif
+elseif( ITDrange == 7 )
+ cnum = -5;
+ if(n==4)
+  ILD = -4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000140s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000160s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000200s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000220s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000260s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000280s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000320s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000340s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000380s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000400s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000420s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000440s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000460s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000480s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000500s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000520s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000540s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000560s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000580s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-4dB_ITD_0.000600s.wav');
+ elseif(n==0)
+  ILD = -2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000140s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000160s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000200s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000220s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000260s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000280s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000320s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000340s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000380s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000400s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000420s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000440s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000460s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000480s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000500s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000520s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000540s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000560s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000580s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD-2dB_ITD_0.000600s.wav');
+ elseif(n==3)
+  ILD = 0;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000140s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000160s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000200s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000220s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000260s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000280s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000320s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000340s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000380s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000400s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000420s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000440s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000460s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000480s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000500s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000520s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000540s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000560s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000580s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD0dB_ITD_0.000600s.wav');
+ elseif(n==1)
+  ILD = 2;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000140s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000160s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000200s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000220s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000260s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000280s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000320s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000340s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000380s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000400s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000420s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000440s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000460s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000480s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000500s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000520s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000540s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000560s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000580s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD2dB_ITD_0.000600s.wav');
+ elseif(n==2)
+  ILD = 4;
+  stimulus1   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000120s.wav');
+  stimulus2   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000140s.wav');
+  stimulus3   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000160s.wav');
+  stimulus4   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000180s.wav');
+  stimulus5   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000200s.wav');
+  stimulus6   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000220s.wav');
+  stimulus7   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000240s.wav');
+  stimulus8   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000260s.wav');
+  stimulus9   =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000280s.wav');
+  stimulus10  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000300s.wav');
+  stimulus11  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000320s.wav');
+  stimulus12  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000340s.wav');
+  stimulus13  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000360s.wav');
+  stimulus14  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000380s.wav');
+  stimulus15  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000400s.wav');
+  stimulus16  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000420s.wav');
+  stimulus17  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000440s.wav');
+  stimulus18  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000460s.wav');
+  stimulus19  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000480s.wav');
+  stimulus20  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000500s.wav');
+  stimulus21  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000520s.wav');
+  stimulus22  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000540s.wav');
+  stimulus23  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000560s.wav');
+  stimulus24  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000580s.wav');
+  stimulus25  =('./octave/experimentsound/dataset/1000Hz/1000Hz_ILD4dB_ITD_0.000600s.wav');
+ endif
+endif
+
+
+Change1 = [];
+Change2 = [];
+count = 0;
+limit = 300;
+number = 13;
+
+
+
+while(change == CENTER || count < limit)
+ 
+ switch number
+     case 1
+        playsound(stimulus1);
+     case 2
+        playsound(stimulus2);
+     case 3
+        playsound(stimulus3);
+     case 4
+        playsound(stimulus4);
+     case 5
+        playsound(stimulus5);
+     case 6
+        playsound(stimulus6);
+     case 7
+        playsound(stimulus7);
+     case 8
+        playsound(stimulus8);
+     case 9
+        playsound(stimulus9);
+     case 10
+        playsound(stimulus10);
+     case 11
+        playsound(stimulus11);
+     case 12
+        playsound(stimulus12);
+     case 13
+        playsound(stimulus13);
+     case 14
+        playsound(stimulus14);
+     case 15
+        playsound(stimulus15);
+     case 16
+        playsound(stimulus16);
+     case 17
+        playsound(stimulus17);
+     case 18
+        playsound(stimulus18);
+     case 19
+        playsound(stimulus19);
+     case 20
+        playsound(stimulus20);
+     case 21
+        playsound(stimulus21);
+     case 22
+        playsound(stimulus22);
+     case 23
+        playsound(stimulus23);
+     case 24
+        playsound(stimulus24);
+     case 25
+        playsound(stimulus25);
+     otherwise
+        input("number error\n");
+ endswitch
+ 
+ #printf("number = %d.\n",number);
+ 
+ F = E;
+ E = D;
+ D = C;
+ C = B;
+ B = A;
+ A = number;
+ 
+ if( (A == C && C == E) && (B == D && D == F) )
+    if( (A == 1 && B == 2) || (A == 2 && B == 1) )
+        printf("\nYou have pressed 1 and Q many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 2  && B == 3)  || (A == 3 && B == 2) )
+        printf("\nYou have pressed Q and 2 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 3  && B == 4)  || (A == 4 && B == 3) )
+        printf("\nYou have pressed 2 and W many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 4  && B == 5)  || (A == 5 && B == 4) )
+        printf("\nYou have pressed W and 3 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 5  && B == 6)  || (A == 6 && B == 5) )
+        printf("\nYou have pressed 3 and E many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 6  && B == 7)  || (A == 7 && B == 6) )
+        printf("\nYou have pressed E and 4 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 7  && B == 8)  || (A == 8 && B == 7) )
+        printf("\nYou have pressed 4 and R many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 8  && B == 9)  || (A == 9 && B == 8) )
+        printf("\nYou have pressed R and 5 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 9  && B == 10) || (A == 10 && B == 9) )
+        printf("\nYou have pressed 5 and T many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 10 && B == 11) || (A == 11 && B == 10) )
+        printf("\nYou have pressed T and 6 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 11 && B == 12) || (A == 12 && B == 11) )
+        printf("\nYou have pressed 6 and Y many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 12 && B == 13) || (A == 13 && B == 12) )
+        printf("\nYou have pressed Y and 7 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 13 && B == 14) || (A == 14 && B == 13) )
+        printf("\nYou have pressed 7 and U many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 14 && B == 15) || (A == 15 && B == 14) )
+        printf("\nYou have pressed U and 8 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 15 && B == 16) || (A == 16 && B == 15) )
+        printf("\nYou have pressed 8 and I many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 16 && B == 17) || (A == 17 && B == 16) )
+        printf("\nYou have pressed I and 9 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 17 && B == 18) || (A == 18 && B == 17) )
+        printf("\nYou have pressed 9 and O many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 18 && B == 19) || (A == 19 && B == 18) )
+        printf("\nYou have pressed O and 0 many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 19 && B == 20) || (A == 20 && B == 19) )
+        printf("\nYou have pressed 0 and P many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 20 && B == 21) || (A == 21 && B == 20) )
+        printf("\nYou have pressed P and - many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 21 && B == 22) || (A == 22 && B == 21) )
+        printf("\nYou have pressed - and @ many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 22 && B == 23) || (A == 23 && B == 22) )
+        printf("\nYou have pressed @ and ^ many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 23 && B == 24) || (A == 24 && B == 23) )
+        printf("\nYou have pressed ^ and [ many time.\nWhy don't you decide to either?\n");
+      elseif( (A == 24 && B == 25) || (A == 25 && B == 24) )
+        printf("\nYou have pressed [ and \\ many time.\nWhy don't you decide to either?\n");
+    endif
+ endif
+ 
+ if( A == B && B == C && C == D )
+    if(A == 1 )
+        printf("\nYou have pressed 1 many time.\nWill not you decide?\n");
+      elseif(A == 2 ) 
+        printf("\nYou have pressed Q many time.\nWill not you decide?\n");
+      elseif(A == 3 ) 
+        printf("\nYou have pressed 2 many time.\nWill not you decide?\n");
+      elseif(A == 4 ) 
+        printf("\nYou have pressed W many time.\nWill not you decide?\n");
+      elseif(A == 5 ) 
+        printf("\nYou have pressed 3 many time.\nWill not you decide?\n");
+      elseif(A == 6 ) 
+        printf("\nYou have pressed E many time.\nWill not you decide?\n");
+      elseif(A == 7 ) 
+        printf("\nYou have pressed 4 many time.\nWill not you decide?\n");
+      elseif(A == 8 ) 
+        printf("\nYou have pressed R many time.\nWill not you decide?\n");
+      elseif(A == 9 ) 
+        printf("\nYou have pressed 5 many time.\nWill not you decide?\n");
+      elseif(A == 10 )
+        printf("\nYou have pressed T many time.\nWill not you decide?\n");
+      elseif(A == 11 )
+        printf("\nYou have pressed 6 many time.\nWill not you decide?\n");
+      elseif(A == 12 ) 
+        printf("\nYou have pressed Y many time.\nWill not you decide?\n");
+      elseif(A == 13 ) 
+        printf("\nYou have pressed 7 many time.\nWill not you decide?\n");
+      elseif(A == 14 ) 
+        printf("\nYou have pressed U many time.\nWill not you decide?\n");
+      elseif(A == 15 ) 
+        printf("\nYou have pressed 8 many time.\nWill not you decide?\n");
+      elseif(A == 16 ) 
+        printf("\nYou have pressed I many time.\nWill not you decide?\n");
+      elseif(A == 17 ) 
+        printf("\nYou have pressed 9 many time.\nWill not you decide?\n");
+      elseif(A == 18 ) 
+        printf("\nYou have pressed O many time.\nWill not you decide?\n");
+      elseif(A == 19 ) 
+        printf("\nYou have pressed 0 many time.\nWill not you decide?\n");
+      elseif(A == 20 )
+        printf("\nYou have pressed P many time.\nWill not you decide?\n");
+      elseif(A == 21 )
+        printf("\nYou have pressed - many time.\nWill not you decide?\n");
+      elseif(A == 22 ) 
+        printf("\nYou have pressed @ many time.\nWill not you decide?\n");
+      elseif(A == 23 ) 
+        printf("\nYou have pressed ^ many time.\nWill not you decide?\n");
+      elseif(A == 24 ) 
+        printf("\nYou have pressed [ many time.\nWill not you decide?\n");
+      elseif(A == 25 ) 
+        printf("\nYou have pressed \\ many time.\nWill not you decide?\n");
+    endif
+ endif
+
+ Change1 = [Change1;number];
+ change = choose(number);
+ #Change2 = [Change2;change];
+ 
+ Flag = 0;
+
+ if( change == CENTER )
+     Flag = 1;
+ endif
+ if( change == "1" || change == "q" || change == "2" || change == "w" || change == "3" || change == "e" )
+     Flag = 1;
+ endif
+ if( change == "4" || change == "r" || change == "5" || change == "t" || change == "6" || change == "y" || change == "7" )
+     Flag = 1;
+ endif
+  if( change == "u" || change == "8" || change == "i" || change == "9" || change == "o" || change == "0" )
+     Flag = 1;
+ endif
+ if( change == "p" || change == "-" || change == "@" || change == "^" || change == "[" || change == "\\" )
+     Flag = 1;
+ endif
+ 
+ 
+ if( Flag == 0 )
+   input("Input error! Listen again. Press Enter key!\n");
+   continue;
+ endif
+ 
+ if( change == "1" )
+   number = 1;
+  elseif( change == "q" )
+   number = 2;
+  elseif( change == "2" )
+   number = 3;
+  elseif( change == "w" )
+   number = 4;
+  elseif( change == "3" )
+   number = 5;
+  elseif( change == "e" )
+   number = 6;
+  elseif( change == "4" )
+   number = 7;
+  elseif( change == "r" )
+   number = 8;
+  elseif( change == "5" )
+   number = 9;
+  elseif( change == "t" )
+   number = 10;
+  elseif( change == "6" )
+   number = 11;
+  elseif( change == "y" )
+   number = 12;
+  elseif( change == "7" )
+   number = 13;
+  elseif( change == "u" )
+   number = 14;
+  elseif( change == "8" )
+   number = 15;
+  elseif( change == "i" )
+   number = 16;
+  elseif( change == "9" )
+   number = 17;
+  elseif( change == "o" )
+   number = 18;
+  elseif( change == "0" )
+   number = 19;
+  elseif( change == "p" )
+   number = 20;
+  elseif( change == "-" )
+   number = 21;
+  elseif( change == "@" )
+   number = 22;
+  elseif( change == "^" )
+   number = 23;
+  elseif( change == "[" )
+   number = 24;
+  elseif( change == "\\" )
+   number = 25;
+endif
+
+     
+ if( number > 25 || 1 > number )
+      input("ITD range over!\n");
+      break;
+ endif
+ 
+ if( change == CENTER )
+     break;
+ endif
+ 
+ 
+ count++;
+ if(count == limit)
+    input("count over!\n");
+ endif
+ 
+ endwhile
+;
+
+ switch n
+    case 0
+      ITD1 = (number - cnum) * 0.000020;
+      save -text result1.txt ILD Change1 ITD1;
+    case 1
+      ITD2 = (number - cnum) * 0.000020;
+      save -text result2.txt ILD Change1 ITD2;
+    case 2
+      ITD3 = (number - cnum) * 0.000020;
+      save -text result3.txt ILD Change1 ITD3;
+    case 3
+      ITD4 = (number - cnum) * 0.000020;
+      save -text result4.txt ILD Change1 ITD4;
+    case 4
+      ITD5 = (number - cnum) * 0.000020;
+      save -text result5.txt ILD Change1 ITD5;
+    otherwise
+      input("loop is error\n");
+ endswitch
+     
+n++;
+endwhile
+
+printf("ITD1 = %8.6fs\n",ITD1);
+printf("ITD2 = %8.6fs\n",ITD2);
+printf("ITD3 = %8.6fs\n",ITD3);
+printf("ITD4 = %8.6fs\n",ITD4);
+printf("ITD5 = %8.6fs\n",ITD5);
+
+
+
+\end{verbatim}
+}
+
