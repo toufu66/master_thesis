@@ -122,7 +122,7 @@
 			今回、データはx,y,zの3軸時系列データ1.5秒分(1500 point)に対して、各軸の信号ごとにFFT処理から得られたスペクトログラムを入力とする。
 			スペクトログラム生成をする際のパラメータとして、FFT窓長を512,スライド幅64とし、窓関数は短形窓とした。
 			生成されたスペクトログラムをCNNの入力として使用する。
-		\subsubsecion{CNNの設計}
+		\subsubsection{CNNの設計}
 			今回使用するCNNの設計は、基本的には\ref{sec:proposal}章と同じであるが、入力のチャネル数をx,y,z軸のデータに対応した3ch
 			入力とした。
 
@@ -146,13 +146,227 @@
 			\end{equation}
 			と表すことができる．ReLU6関数は計算速度が速く，値の消失や発散の問題を防ぐことができるという特徴がある\cite{tensorflow}．
 		
-
+	\subsection{データセット}
+		今回収集したデータセットに関して以下のリストにまとめる。
+		\begin{table}[htb]
+			\begin{center}
+			\begin{tabular}{|l||c| c | }\hline
+				データセットの名称&計測秒数 & 押付力\\ \hline \hline
+				PIP 1 & 120秒&600 g\\ \hline
+				PIP 2 & 30秒&600 g\\ \hline
+				PIP 3 & 90秒&600 g\\ \hline
+				Nail 1 & 90秒&600 g\\ \hline
+				Nail 2 & 120秒&600 g\\ \hline
+			\end{tabular}
+		\end{center}
+		\end{table}
 	\subsection{学習条件}
 		今回使用するデータは、同日内のデータでも精度の比較を行うために5分割交差検証を行い、用意されたデータのうち、常に1/5を使用していない
-		状態で学習をすすめる。
-	\subsection{}　
+		状態で学習をすすめる。計測日の違うデータ同士の学習と検証の組み合わせとして、PIPのデータ同士、Nailのデータ同士で比較を行う。
+		学習を進めていき、出力に対する損失関数の値が0.001より小さくなれば学習を終了するように設定している。
+		
+	\subsection{分類精度の比較}
+		\subsubsection{PIP1で学習をしてPIP3を分類した結果}
+		PIP1で学習済みのCNNモデルに検証用のデータセットPIP3を分類した結果をグラフに出力したものを図\ref{fig:3_1}に示す。
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1で学習をした場合のPIP3の分類精度}
+			  \label{fig:3_1}
+			\end{center}
+		\end{figure}
 
-\section{}
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3分類(訓練群1)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3分類(訓練群2)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3分類(訓練群3)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\subsubsection{PIP3で学習をしてPIP1を分類した結果}
+		PIP3で学習済みのCNNモデルに検証用のデータセットPIP1を分類した結果をグラフに出力したものを図\ref{fig:3_1}に示す。
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP3で学習をした場合のPIP1の分類精度}
+			  \label{fig:3_1}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1分類(訓練群1)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1分類(訓練群2)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1分類(訓練群3)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{PIP1分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+		
+
+		\subsubsection{Nail1で学習をしてNail2を分類した結果}
+		Nail1で学習済みのCNNモデルに検証用のデータセットNail2を分類した結果をグラフに出力したものを図\ref{fig:3_1}に示す。
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1で学習をした場合のNail2の分類精度}
+			  \label{fig:3_1}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2分類(訓練群1)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2分類(訓練群2)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2分類(訓練群3)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2分類(訓練群5)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		
+
+		\subsubsection{Nail2で学習をしてNail1を分類した結果}
+		Nail1で学習済みのCNNモデルに検証用のデータセットNail2を分類した結果をグラフに出力したものを図\ref{fig:3_1}に示す。
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail2で学習をした場合のNail1の分類精度}
+			  \label{fig:3_1}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1分類(訓練群1)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1分類(訓練群2)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1分類(訓練群3)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1分類(訓練群4)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+		\begin{figure}[htbp]
+			\begin{center}			  			  
+			  \includegraphics[width=10cm,height=6cm]{./fig/alt.eps}
+			  \caption{Nail1分類(訓練群5)の混同行列}
+			  \label{fig:3_2}
+			\end{center}
+		\end{figure}
+
+
+\section{考察}
 
 \section{まとめ}
 
